@@ -26,7 +26,7 @@ public class VehicleDao {
             preparedStatement.setString(6, vehicle.getColor());
             preparedStatement.setInt(7, vehicle.getOdometer());
             preparedStatement.setDouble(8,vehicle.getPrice());
-            preparedStatement.setBoolean(9, false);
+            preparedStatement.setBoolean(9, vehicle.isSold());
 
             int rows = preparedStatement.executeUpdate();
             System.out.println("Rows Inserted: " + rows);
