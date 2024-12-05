@@ -8,18 +8,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleDao {
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
     public VehicleDao(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
     public void addVehicle(Vehicle vehicle) {
-        // TODO: Implement the logic to add a vehicle
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "INSERT INTO vehicles (vin, year, make, model, type, color, odometer, price, sold) VALUES (?,?,?,?,?,?,?,?,?)")) {
+            preparedStatement.setString(1, vehicle.getVin());
+            preparedStatement.setInt(2, vehicle.getYear());
+            preparedStatement.setString(3, vehicle.getMake());
+            preparedStatement.setString(4, vehicle.getModel());
+            preparedStatement.setString(5, vehicle.getVehicleType());
+            preparedStatement.setString(6, vehicle.getColor());
+            preparedStatement.setInt(7, vehicle.getOdometer());
+            preparedStatement.setDouble(8,vehicle.getPrice());
+            preparedStatement.setBoolean(9, false);
+
+            int rows = preparedStatement.executeUpdate();
+            System.out.println("Rows Inserted: " + rows);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void removeVehicle(String VIN) {
-        // TODO: Implement the logic to remove a vehicle
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "DELETE FROM vehicles WHERE VIN = ?")) {
+            preparedStatement.setString(1, VIN);
+
+            int rows = preparedStatement.executeUpdate();
+            System.out.println("Rows Deleted: " + rows);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public List<Vehicle> searchByPriceRange(double minPrice, double maxPrice) {
