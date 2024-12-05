@@ -9,8 +9,6 @@ import com.yearup.dealership.models.SalesContract;
 import com.yearup.dealership.models.Vehicle;
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -18,6 +16,11 @@ import java.util.UUID;
 
 public class Main {
     public static void main(String[] args) {
+        if(args.length != 2){
+            System.out.println("Username and password must not be blank");
+            return;
+        }
+
         String username = args[0];
         String password = args[1];
 
@@ -49,24 +52,12 @@ public class Main {
             scanner.nextLine(); // Consume the newline character
 
             switch (choice) {
-                case 1:
-                    searchVehiclesMenu(vehicleDao, scanner);
-                    break;
-                case 2:
-                    addVehicleMenu(vehicleDao, inventoryDao, scanner);
-                    break;
-                case 3:
-                    addContractMenu(salesDao, leaseDao, scanner);
-                    break;
-                case 4:
-                    removeVehicleMenu(vehicleDao, inventoryDao, scanner);
-                    break;
-                case 5:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+                case 1 -> searchVehiclesMenu(vehicleDao, scanner);
+                case 2 -> addVehicleMenu(vehicleDao, inventoryDao, scanner);
+                case 3 -> addContractMenu(salesDao, leaseDao, scanner);
+                case 4 -> removeVehicleMenu(vehicleDao, inventoryDao, scanner);
+                case 5 -> exit = true;
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
 
@@ -85,15 +76,9 @@ public class Main {
         scanner.nextLine(); // Consume the newline character
 
         switch (contractTypeChoice) {
-            case 1:
-                addSalesContract(salesDao, vin, scanner);
-                break;
-            case 2:
-                addLeaseContract(leaseDao, vin, scanner);
-                break;
-            default:
-                System.out.println("Invalid choice. Contract not added.");
-                break;
+            case 1 -> addSalesContract(salesDao, vin, scanner);
+            case 2 -> addLeaseContract(leaseDao, vin, scanner);
+            default -> System.out.println("Invalid choice. Contract not added.");
         }
     }
 
@@ -150,30 +135,14 @@ public class Main {
             scanner.nextLine(); // Consume the newline character
 
             switch (choice) {
-                case 1:
-                    searchByPriceRange(vehicleDao, scanner);
-                    break;
-                case 2:
-                    searchByMakeAndModel(vehicleDao, scanner);
-                    break;
-                case 3:
-                    searchByYearRange(vehicleDao, scanner);
-                    break;
-                case 4:
-                    searchByColor(vehicleDao, scanner);
-                    break;
-                case 5:
-                    searchByMileageRange(vehicleDao, scanner);
-                    break;
-                case 6:
-                    searchByType(vehicleDao, scanner);
-                    break;
-                case 7:
-                    back = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
+                case 1 -> searchByPriceRange(vehicleDao, scanner);
+                case 2 -> searchByMakeAndModel(vehicleDao, scanner);
+                case 3 -> searchByYearRange(vehicleDao, scanner);
+                case 4 -> searchByColor(vehicleDao, scanner);
+                case 5 -> searchByMileageRange(vehicleDao, scanner);
+                case 6 -> searchByType(vehicleDao, scanner);
+                case 7 -> back = true;
+                default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }
@@ -308,8 +277,7 @@ public class Main {
         UUID uuid = UUID.randomUUID();
         String randomUUIDString = uuid.toString().toUpperCase().replaceAll("-", "");
         // Assuming VIN length is 17 characters, you can adjust this if needed
-        String vin = randomUUIDString.substring(0, 17);
-        return vin;
+        return randomUUIDString.substring(0, 17);
     }
 
 }
