@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public class SalesContract {
     private int contractId;
-    private String vin;
-    private LocalDate saleDate;
-    private double price;
+    private final String vin;
+    private final LocalDate saleDate;
+    private final double price;
 
     public SalesContract(String vin, LocalDate saleDate, double price) {
         this.vin = vin;
@@ -26,32 +26,16 @@ public class SalesContract {
         return contractId;
     }
 
-    public void setContractId(int contractId) {
-        this.contractId = contractId;
-    }
-
     public String getVin() {
         return vin;
-    }
-
-    public void setVin(String vin) {
-        this.vin = vin;
     }
 
     public LocalDate getSaleDate() {
         return saleDate;
     }
 
-    public void setSaleDate(LocalDate saleDate) {
-        this.saleDate = saleDate;
-    }
-
     public double getPrice() {
         return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
 

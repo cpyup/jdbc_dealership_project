@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class LeaseContract {
     private int contractId;
-    private String vin;
-    private LocalDate leaseStart;
-    private LocalDate leaseEnd;
-    private double monthlyPayment;
+    private final String vin;
+    private final LocalDate leaseStart;
+    private final LocalDate leaseEnd;
+    private final double monthlyPayment;
 
     public LeaseContract(String vin, LocalDate leaseStart, LocalDate leaseEnd, double monthlyPayment) {
         this.vin = vin;
@@ -28,41 +28,22 @@ public class LeaseContract {
         return contractId;
     }
 
-    public void setContractId(int contractId) {
-        this.contractId = contractId;
-    }
-
     public String getVin() {
         return vin;
-    }
-
-    public void setVin(String vin) {
-        this.vin = vin;
     }
 
     public LocalDate getLeaseStart() {
         return leaseStart;
     }
 
-    public void setLeaseStart(LocalDate leaseStart) {
-        this.leaseStart = leaseStart;
-    }
-
     public LocalDate getLeaseEnd() {
         return leaseEnd;
-    }
-
-    public void setLeaseEnd(LocalDate leaseEnd) {
-        this.leaseEnd = leaseEnd;
     }
 
     public double getMonthlyPayment() {
         return monthlyPayment;
     }
 
-    public void setMonthlyPayment(double monthlyPayment) {
-        this.monthlyPayment = monthlyPayment;
-    }
 
     @Override
     public String toString() {
