@@ -17,7 +17,7 @@ public class VehicleDao {
     public void addVehicle(Vehicle vehicle) {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "INSERT INTO vehicles (vin, year, make, model, type, color, odometer, price, sold) VALUES (?,?,?,?,?,?,?,?,?)")) {
+                     "INSERT INTO vehicles (vin, year, make, model, vehicleType, color, odometer, price, sold) VALUES (?,?,?,?,?,?,?,?,?)")) {
             preparedStatement.setString(1, vehicle.getVin());
             preparedStatement.setInt(2, vehicle.getYear());
             preparedStatement.setString(3, vehicle.getMake());
@@ -52,7 +52,7 @@ public class VehicleDao {
 
     public List<Vehicle> searchByPriceRange(double minPrice, double maxPrice) {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
-        String vehicleQuery = "SELECT * FROM dealership.vehicles WHERE price BETWEEN ? AND ?";
+        String vehicleQuery = "SELECT * FROM vehicles WHERE price BETWEEN ? AND ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(vehicleQuery)) {
@@ -73,7 +73,8 @@ public class VehicleDao {
 
     public List<Vehicle> searchByMakeModel(String make, String model) {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
-        String vehicleQuery = "SELECT * FROM dealership.vehicles WHERE make LIKE ? AND model LIKE ?";
+        // Using like because I am bad with car stuff
+        String vehicleQuery = "SELECT * FROM vehicles WHERE make LIKE ? AND model LIKE ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(vehicleQuery)) {
@@ -93,7 +94,7 @@ public class VehicleDao {
 
     public List<Vehicle> searchByYearRange(int minYear, int maxYear) {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
-        String vehicleQuery = "SELECT * FROM dealership.vehicles WHERE year BETWEEN ? AND ?";
+        String vehicleQuery = "SELECT * FROM vehicles WHERE year BETWEEN ? AND ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(vehicleQuery)) {
@@ -113,7 +114,7 @@ public class VehicleDao {
 
     public List<Vehicle> searchByColor(String color) {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
-        String vehicleQuery = "SELECT * FROM dealership.vehicles WHERE color = ?";
+        String vehicleQuery = "SELECT * FROM vehicles WHERE color = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(vehicleQuery)) {
@@ -132,7 +133,7 @@ public class VehicleDao {
 
     public List<Vehicle> searchByMileageRange(int minMileage, int maxMileage) {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
-        String vehicleQuery = "SELECT * FROM dealership.vehicles WHERE odometer BETWEEN ? AND ?";
+        String vehicleQuery = "SELECT * FROM vehicles WHERE odometer BETWEEN ? AND ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(vehicleQuery)) {
@@ -152,7 +153,7 @@ public class VehicleDao {
 
     public List<Vehicle> searchByType(String type) {
         ArrayList<Vehicle> vehicles = new ArrayList<>();
-        String vehicleQuery = "SELECT * FROM dealership.vehicles WHERE type = ?";
+        String vehicleQuery = "SELECT * FROM vehicles WHERE vehicleType = ?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(vehicleQuery)) {
@@ -177,7 +178,7 @@ public class VehicleDao {
         vehicle.setYear(resultSet.getInt("year"));
         vehicle.setSold(resultSet.getBoolean("SOLD"));
         vehicle.setColor(resultSet.getString("color"));
-        vehicle.setVehicleType(resultSet.getString("type"));
+        vehicle.setVehicleType(resultSet.getString("vehicleType"));
         vehicle.setOdometer(resultSet.getInt("odometer"));
         vehicle.setPrice(resultSet.getDouble("price"));
         return vehicle;

@@ -6,40 +6,20 @@ public class SalesContract {
     private int contractId;
     private String vin;
     private LocalDate saleDate;
-    private double totalCost;
-    private String name;
-    private String email;
-    private double salesTax;
-    private double recordingFee;
-    private double processingFee;
-    private boolean financed;
-    private double monthlyPayment;
+    private double price;
 
-    public SalesContract(String vin, LocalDate saleDate, double totalCost) {
+    public SalesContract(String vin, LocalDate saleDate, double price) {
         this.vin = vin;
         this.saleDate = saleDate;
-        this.totalCost = totalCost;
-        this.name = "TESTING_NAME";
-        this.email = "TESTING_EMAIL";
-        this.salesTax = 0;
-        this.recordingFee = 0;
-        this.processingFee = 0;
-        this.financed = false;
-        this.monthlyPayment = 0;
+        this.price = price;
+
     }
 
-    public SalesContract(int contractId, String vin, LocalDate saleDate, double totalCost, String name, String email, double salesTax, double recordingFee, double processingFee, boolean financed, Double monthlyPayment) {
+    public SalesContract(int contractId, String vin, LocalDate saleDate, double price) {
         this.contractId = contractId;
         this.vin = vin;
         this.saleDate = saleDate;
-        this.totalCost = totalCost;
-        this.name = name;
-        this.email = email;
-        this.salesTax = salesTax;
-        this.recordingFee = recordingFee;
-        this.processingFee = processingFee;
-        this.financed = financed;
-        this.monthlyPayment = monthlyPayment;
+        this.price = price;
     }
 
     public int getContractId() {
@@ -66,61 +46,14 @@ public class SalesContract {
         this.saleDate = saleDate;
     }
 
-    public double getTotalCost() {
-        return totalCost;
+    public double getPrice() {
+        return price;
     }
 
-    public void setTotalCost(double totalCost) {
-        this.totalCost = totalCost;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public double getRecordingFee() {
-        return recordingFee;
-    }
-
-    public void setRecordingFee(double recordingFee) {
-        this.recordingFee = recordingFee;
-    }
-
-    public double getProcessingFee() {
-        return processingFee;
-    }
-
-    public void setProcessingFee(double processingFee) {
-        this.processingFee = processingFee;
-    }
-
-    public boolean isFinanced() {
-        return financed;
-    }
-
-    public void setFinanced(boolean financed) {
-        this.financed = financed;
-    }
-
-    public double getMonthlyPayment() {
-        return monthlyPayment;
-    }
-
-    public void setMonthlyPayment(double monthlyPayment) {
-        this.monthlyPayment = monthlyPayment;
-    }
-
-    public double getSalesTax(){
-        return salesTax;
-    }
 
     @Override
     public String toString() {
@@ -128,7 +61,7 @@ public class SalesContract {
                 "contractId=" + contractId +
                 ", vin='" + vin + '\'' +
                 ", saleDate=" + saleDate +
-                ", totalCost" + totalCost +
+                ", totalCost" + price +
                 '}';
     }
 }
